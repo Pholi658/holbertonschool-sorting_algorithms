@@ -1,7 +1,7 @@
 #include "sort.h"
 
 /**
- * swap_int - swap two integers
+ * swap_int - Swap two integers
  * @a: pointer to first int
  * @b: pointer to second int
  */
@@ -15,11 +15,11 @@ static void swap_int(int *a, int *b)
 }
 
 /**
- * lomuto_partition - partition with Lomuto scheme and print after each swap
+ * lomuto_partition - Partition array using Lomuto scheme and print after each swap
  * @array: array to partition
  * @low: starting index
  * @high: ending index (pivot)
- * @size: size of the array (for print_array)
+ * @size: array size for print_array
  *
  * Return: partition index
  */
@@ -36,7 +36,7 @@ static int lomuto_partition(int *array, int low, int high, size_t size)
 	{
 		if (array[j] < pivot)
 		{
-			if (i != j)
+			if (i != j && array[i] != array[j])
 			{
 				swap_int(&array[i], &array[j]);
 				print_array(array, size);
@@ -46,21 +46,22 @@ static int lomuto_partition(int *array, int low, int high, size_t size)
 		j++;
 	}
 
-	/* swap pivot into place */
-	if (i != high)
+	/* Swap pivot into place only if needed */
+	if (i != high && array[i] != array[high])
 	{
 		swap_int(&array[i], &array[high]);
 		print_array(array, size);
 	}
+
 	return (i);
 }
 
 /**
- * quick_rec - recursive Quick sort (Lomuto)
+ * quick_rec - Recursively sorts using Quick sort (Lomuto)
  * @array: array to sort
  * @low: starting index
  * @high: ending index
- * @size: size of the array (for print_array)
+ * @size: size of array (for printing)
  */
 static void quick_rec(int *array, int low, int high, size_t size)
 {

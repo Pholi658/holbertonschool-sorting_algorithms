@@ -15,7 +15,7 @@ static void swap_int(int *a, int *b)
 }
 
 /**
- * lomuto_partition - Partition array using Lomuto scheme and print after each swap
+ * lomuto_partition - Partition array using Lomuto scheme and print swaps
  * @array: array to partition
  * @low: starting index
  * @high: ending index (pivot)
@@ -36,6 +36,7 @@ static int lomuto_partition(int *array, int low, int high, size_t size)
 	{
 		if (array[j] < pivot)
 		{
+			/* only swap if i and j differ and values are different */
 			if (i != j && array[i] != array[j])
 			{
 				swap_int(&array[i], &array[j]);
@@ -46,7 +47,7 @@ static int lomuto_partition(int *array, int low, int high, size_t size)
 		j++;
 	}
 
-	/* Swap pivot into place only if needed */
+	/* swap pivot into place only if different from target */
 	if (i != high && array[i] != array[high])
 	{
 		swap_int(&array[i], &array[high]);
@@ -61,7 +62,7 @@ static int lomuto_partition(int *array, int low, int high, size_t size)
  * @array: array to sort
  * @low: starting index
  * @high: ending index
- * @size: size of array (for printing)
+ * @size: size of array for printing
  */
 static void quick_rec(int *array, int low, int high, size_t size)
 {
@@ -76,8 +77,8 @@ static void quick_rec(int *array, int low, int high, size_t size)
 }
 
 /**
- * quick_sort - Sorts an array of integers in ascending order
- * using the Quick sort algorithm with Lomuto partition scheme.
+ * quick_sort - Sorts an array of integers in ascending order using
+ * Quick sort algorithm with Lomuto partition scheme.
  * @array: array to sort
  * @size: number of elements in array
  */
